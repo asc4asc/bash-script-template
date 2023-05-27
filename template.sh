@@ -142,7 +142,7 @@ function script_init() {
     readonly ta_none="$(tput sgr0 2> /dev/null || true)"
 }
 
-# DESC: Initialise colour variables
+# DESC: Initialise colour variables / please remove
 # ARGS: None
 # OUTS: Read-only variables with ANSI control codes
 # NOTE: If --no-colour was set the variables will be empty. The output of the
@@ -228,7 +228,7 @@ function colour_init() {
     fi
 }
 
-# DESC: Initialise Cron mode
+# DESC: Initialise Cron mode / please remove
 # ARGS: None
 # OUTS: $script_output: Path to the file stdout & stderr was redirected to
 function cron_init() {
@@ -417,11 +417,10 @@ function run_as_root() {
 # OUTS: None
 function script_usage() {
     cat << EOF
+Easy template for starting simple scripts with documentation.
 Usage:
      -h|--help                  Displays this help
      -v|--verbose               Displays verbose output
-    -nc|--no-colour             Disables colour output
-    -cr|--cron                  Run silently unless we encounter an error
 EOF
 }
 
@@ -434,18 +433,12 @@ function parse_params() {
         param="$1"
         shift
         case $param in
-            -h | --help)
+            i-\? | -h | --help)
                 script_usage
                 exit 0
                 ;;
             -v | --verbose)
                 verbose=true
-                ;;
-            -nc | --no-colour)
-                no_colour=true
-                ;;
-            -cr | --cron)
-                cron=true
                 ;;
             *)
                 script_exit "Invalid parameter was provided: $param" 1
@@ -463,8 +456,6 @@ function main() {
 
     script_init "$@"
     parse_params "$@"
-    cron_init
-    colour_init
     #lock_init system
 }
 
