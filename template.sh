@@ -447,6 +447,7 @@ function parse_params() {
     done
 }
 
+# try to put it on the top of the script for easy modification.
 # DESC: Main control flow
 # ARGS: $@ (optional): Arguments provided to the script
 # OUTS: None
@@ -457,6 +458,7 @@ function main() {
     script_init "$@"
     parse_params "$@"
     #lock_init system
+    # here add your own commands and functions! 
 }
 
 # Invoke main with args if not sourced
