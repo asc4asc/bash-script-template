@@ -3,7 +3,7 @@ powercycle oder reboot oder mix am Namen fest machen.
 * test4me-powercycle
 * test4me-1pow-1reboot
 
-starten mit * oder aus dir.
+~/autostart.dir/<link>named>test4me-powercycle to /usr/local/bin/test4me oder test4me-reboot
 
-Dir start mit 10-test4me-powercycle ...
-dann könnte man einfach scripte fuer log reboot ..... kombinieren durch kopieren.
+man braucht auch noch:
+~/.config/autostart/term
