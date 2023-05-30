@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+# Exec=gnome-terminal 
+# Exec=sudo gnome-terminal
+Exec=gnome-terminal -- run-parts test4me.dir
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=term
+Name=term
+Comment[en_US]=
+Comment=
+X-GNOME-Autostart-Delay=0
