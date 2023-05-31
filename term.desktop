@@ -2,7 +2,7 @@
 Type=Application
 # Exec=gnome-terminal 
 # Exec=sudo gnome-terminal
-Exec=gnome-terminal -- run-parts test4me.dir
+Exec=gnome-terminal -- run-parts autostart.dir
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
