@@ -24,7 +24,7 @@ ln -s /usr/local/bin/testme ~/${autostartdir}/testme-reboot
 
 # man braucht auch noch:
 # ~/.config/autostart/term.desktop
-cp term.autostart ~/.config/autostart
+cp term.desktop ~/.config/autostart
 )
 
 gen_sudo
