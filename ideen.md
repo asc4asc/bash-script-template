@@ -1,18 +1,21 @@
-powercycle oder reboot oder mix am Namen fest machen.
-* test4me-reboot
-* test4me-powercycle
+#!/usr/bin/env bash
+# powercycle oder reboot oder mix am Namen fest machen.
+# * test4me-reboot
+# * test4me-powercycle
 
-~/autostart.dir/<link>named>test4me-powercycle to /usr/local/bin/test4me oder test4me-reboot
+# ~/autostart.dir/<link>named>test4me-powercycle to /usr/local/bin/test4me oder test4me-reboot
 
 mkdir autostart.dir
+cp testme /usr/local/bin/
 sudo chmod a+x /usr/local/bin/test4me
-ln -s /usr/local/bin/testme autostart.dir/testme-reboot
+ln -s /usr/local/bin/testme ~/autostart.dir/testme-reboot
 
-man braucht auch noch:
-~/.config/autostart/term.desktop
+# man braucht auch noch:
+# ~/.config/autostart/term.desktop
+cp term.autostart ~/.config/autostart
 
-Fuer Graphische Oberflaeche:
-Settings -> User Auomatic login [enable]
+echo "Fuer Graphische Oberflaeche:"
+echo "Settings -> User Auomatic login [enable]"
 
-Weitere Ideen fuer die Zukunft.
-* test4me-1pow-1reboot
+# Weitere Ideen fuer die Zukunft.
+# * test4me-1pow-1reboot
