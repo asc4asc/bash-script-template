@@ -5,14 +5,24 @@
 
 # ~/autostart.dir/<link>named>test4me-powercycle to /usr/local/bin/test4me oder test4me-reboot
 
-mkdir autostart.dir
+func place_bin()
+{
 cp testme /usr/local/bin/
 sudo chmod a+x /usr/local/bin/test4me
+}
+
+func make_autostart()
+{
+mkdir autostart.dir
 ln -s /usr/local/bin/testme ~/autostart.dir/testme-reboot
 
 # man braucht auch noch:
 # ~/.config/autostart/term.desktop
 cp term.autostart ~/.config/autostart
+)
+
+place_bin
+make_autostart
 
 echo "Fuer Graphische Oberflaeche:"
 echo "Settings -> User Auomatic login [enable]"
