@@ -3,6 +3,7 @@
 # * test4me-reboot
 # * test4me-powercycle
 
+readonly autostartdir="autostart.dir"
 function gen_sudo()
 {
 [[ $USER == 'root' ]] && USER=ekf # add check if user ekf is present in this system
@@ -18,8 +19,8 @@ sudo chmod a+x /usr/local/bin/test4me
 
 function make_autostart()
 {
-mkdir autostart.dir
-ln -s /usr/local/bin/testme ~/autostart.dir/testme-reboot
+mkdir ${autostartdir}
+ln -s /usr/local/bin/testme ~/${autostartdir}/testme-reboot
 
 # man braucht auch noch:
 # ~/.config/autostart/term.desktop
