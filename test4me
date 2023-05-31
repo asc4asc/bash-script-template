@@ -3,8 +3,6 @@
 readonly SLEEP4USER=5
 readonly OUT_FILE=count.file
 readonly LEN_OFF_POWERCYCLE=20 # powercycle
-# let count=0
-# let myerr=0
 
 function write_log()
 # $OUT_FILE global constante
@@ -14,12 +12,6 @@ function write_log()
   echo -n "ERR:${myerr} " >>$OUT_FILE && date --iso-8601=ns | tr "\n" " " >>$OUT_FILE 
   lspci -n|grep -i "168c" >>$OUT_FILE || echo -n "No Advantec Device found! " >>$OUT_FILE
   echo "Will do ${script_ext}" >>$OUT_FILE
-}
-
-function catch_error_old()
-{
-# global var set only here -> $myerr
-lspci|grep "Qualcomm Atheros AR958x 802.11abgn Wireless Network Adapter (rev 01)" || let myerr=1  
 }
 
 function catch_error()
@@ -170,92 +162,6 @@ function script_init() {
     # Important to always set as we use it in the exit handler
     # shellcheck disable=SC2155
     readonly ta_none="$(tput sgr0 2> /dev/null || true)"
-}
-
-# DESC: Initialise colour variables
-# ARGS: None
-# OUTS: Read-only variables with ANSI control codes
-# NOTE: If --no-colour was set the variables will be empty. The output of the
-#       $ta_none variable after each tput is redundant during normal execution,
-#       but ensures the terminal output isn't mangled when running with xtrace.
-# shellcheck disable=SC2034,SC2155
-function colour_init() {
-    if [[ -z ${no_colour-} ]]; then
-        # Text attributes
-        readonly ta_bold="$(tput bold 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly ta_uscore="$(tput smul 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly ta_blink="$(tput blink 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly ta_reverse="$(tput rev 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly ta_conceal="$(tput invis 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-
-        # Foreground codes
-        readonly fg_black="$(tput setaf 0 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly fg_blue="$(tput setaf 4 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly fg_cyan="$(tput setaf 6 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly fg_green="$(tput setaf 2 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly fg_magenta="$(tput setaf 5 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly fg_red="$(tput setaf 1 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly fg_white="$(tput setaf 7 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly fg_yellow="$(tput setaf 3 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-
-        # Background codes
-        readonly bg_black="$(tput setab 0 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly bg_blue="$(tput setab 4 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly bg_cyan="$(tput setab 6 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly bg_green="$(tput setab 2 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly bg_magenta="$(tput setab 5 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly bg_red="$(tput setab 1 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly bg_white="$(tput setab 7 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-        readonly bg_yellow="$(tput setab 3 2> /dev/null || true)"
-        printf '%b' "$ta_none"
-    else
-        # Text attributes
-        readonly ta_bold=''
-        readonly ta_uscore=''
-        readonly ta_blink=''
-        readonly ta_reverse=''
-        readonly ta_conceal=''
-
-        # Foreground codes
-        readonly fg_black=''
-        readonly fg_blue=''
-        readonly fg_cyan=''
-        readonly fg_green=''
-        readonly fg_magenta=''
-        readonly fg_red=''
-        readonly fg_white=''
-        readonly fg_yellow=''
-
-        # Background codes
-        readonly bg_black=''
-        readonly bg_blue=''
-        readonly bg_cyan=''
-        readonly bg_green=''
-        readonly bg_magenta=''
-        readonly bg_red=''
-        readonly bg_white=''
-        readonly bg_yellow=''
-    fi
 }
 
 # DESC: Acquire script lock
@@ -440,7 +346,7 @@ Please name it to .powercycle or .reboot and it make this after testing module.
 Usage:
     -?|-h|--help               Displays this help
     -v|--verbose               Displays verbose output
-    -c                         remove the log file. / That starts a new test cycle
+    -c                         clear and save the log file. 
     -s                         show how many errors
 EOF
 
@@ -463,10 +369,10 @@ function parse_params() {
                 verbose=true
                 ;;
             -c )
-                echo clean
                 if [ -f "${OUT_FILE}" ] ; then 
 	           mv ${OUT_FILE} ${OUT_FILE}.$(date --iso-8601=ns) # neuen Test vorbereiten!
-                fi
+	           echo clean and save to: ${OUT_FILE}.$(date --iso-8601=ns) 
+		fi
 		exit 0
                 ;;
             -s )
