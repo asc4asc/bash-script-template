@@ -5,13 +5,13 @@
 
 # ~/autostart.dir/<link>named>test4me-powercycle to /usr/local/bin/test4me oder test4me-reboot
 
-func place_bin()
+function place_bin()
 {
 cp testme /usr/local/bin/
 sudo chmod a+x /usr/local/bin/test4me
 }
 
-func make_autostart()
+function make_autostart()
 {
 mkdir autostart.dir
 ln -s /usr/local/bin/testme ~/autostart.dir/testme-reboot
