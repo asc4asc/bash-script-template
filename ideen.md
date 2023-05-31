@@ -17,6 +17,25 @@ cp testme /usr/local/bin/
 sudo chmod a+x /usr/local/bin/test4me
 }
 
+function gen_autoterm()
+{
+cat << EOF
+[Desktop Entry]
+Type=Application
+# Exec=gnome-terminal 
+# Exec=sudo gnome-terminal
+Exec=gnome-terminal -- run-parts autostart.dir
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=term
+Name=term
+Comment[en_US]=
+Comment=
+X-GNOME-Autostart-Delay=0
+EOF > ~/.config/autostart/term.desktop
+}
+
 function make_autostart()
 {
 mkdir ${autostartdir}
@@ -25,6 +44,7 @@ ln -s /usr/local/bin/testme ~/${autostartdir}/testme-reboot
 # man braucht auch noch:
 # ~/.config/autostart/term.desktop
 cp term.desktop ~/.config/autostart
+# gen_autoterm
 )
 
 gen_sudo
