@@ -19,6 +19,8 @@ sudo chmod a+x /usr/local/bin/${1}
 
 function gen_autoterm()
 {
+mkdir ${HOME}/.config/autostart
+
     cat << EOF  > ${HOME}/.config/autostart/term.desktop
 [Desktop Entry]
 Type=Application
@@ -39,7 +41,7 @@ EOF
 function make_autostart()
 {
 mkdir ${autostartdir}
-ln -s /usr/local/bin/testme ${autostartdir}/testme-reboot
+ln -s /usr/local/bin/test4me ${autostartdir}/test4me-reboot
 
 # man braucht auch noch:
 # ~/.config/autostart/term.desktop
