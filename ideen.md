@@ -3,7 +3,7 @@
 # * test4me-reboot
 # * test4me-powercycle
 
-readonly autostartdir="autostart.dir"
+readonly autostartdir="${HOME}autostart.dir"
 function gen_sudo()
 {
 [[ $USER == 'root' ]] && USER=ekf # add check if user ekf is present in this system
@@ -13,13 +13,13 @@ sudo addgroup --group testsu && sudo adduser ${USER} testsu && sudo echo '%tests
 function place_bin()
 # ~/autostart.dir/<link>named>test4me-powercycle to /usr/local/bin/test4me oder test4me-reboot
 {
-cp testme /usr/local/bin/
-sudo chmod a+x /usr/local/bin/test4me
+cp ${1} /usr/local/bin/
+sudo chmod a+x /usr/local/bin/${1}
 }
 
 function gen_autoterm()
 {
-cat << EOF
+    cat << EOF  > ${HOME}/.config/autostart/term.desktop
 [Desktop Entry]
 Type=Application
 # Exec=gnome-terminal 
@@ -33,22 +33,22 @@ Name=term
 Comment[en_US]=
 Comment=
 X-GNOME-Autostart-Delay=0
-EOF > ~/.config/autostart/term.desktop
+EOF
 }
 
 function make_autostart()
 {
 mkdir ${autostartdir}
-ln -s /usr/local/bin/testme ~/${autostartdir}/testme-reboot
+ln -s /usr/local/bin/testme ${autostartdir}/testme-reboot
 
 # man braucht auch noch:
 # ~/.config/autostart/term.desktop
-cp term.desktop ~/.config/autostart
+cp term.desktop ${HOME}/.config/autostart
 # gen_autoterm
-)
+}
 
 gen_sudo
-place_bin
+place_bin test4me
 make_autostart
 
 echo "Fuer Graphische Oberflaeche:"
