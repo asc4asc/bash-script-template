@@ -3,7 +3,7 @@
 # * test4me-reboot
 # * test4me-powercycle
 
-readonly autostartdir="${HOME}autostart.dir"
+readonly autostartdir="${HOME}/autostart.dir"
 function gen_sudo()
 {
 [[ $USER == 'root' ]] && USER=ekf # add check if user ekf is present in this system
@@ -13,7 +13,7 @@ sudo addgroup --group testsu && sudo adduser ${USER} testsu && sudo echo '%tests
 function place_bin()
 # ~/autostart.dir/<link>named>test4me-powercycle to /usr/local/bin/test4me oder test4me-reboot
 {
-cp ${1} /usr/local/bin/
+sudo cp ${1} /usr/local/bin/
 sudo chmod a+x /usr/local/bin/${1}
 }
 
