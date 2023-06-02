@@ -76,6 +76,17 @@ X-GNOME-Autostart-Delay=0
 EOF
 }
 
+function gen_login()
+{
+   
+    sudo cat << EOF  > /etc/gdm3/custom.conf
+[daemon]
+AutomaticLoginEnable=True
+AutomaticLogin=${USER}
+EOF
+}
+
+
 function make_autostart()
 {
     mkdir -p ${autostartdir}
