@@ -4,9 +4,9 @@
 # ARGS: None
 # OUTS: None
 function script_usage() {
-    echo " Helper script that prepare a new installed Ubuntu .... to work as a test system with boot cycles.
     cat << EOF
-Easy template for starting simple scripts with documentation.
+Helper script that prepare a new installed Ubuntu .... to work as a test system with boot cycles.
+
 Usage:
      -h|--help                  Displays this help
      -v|--verbose               Displays verbose output
