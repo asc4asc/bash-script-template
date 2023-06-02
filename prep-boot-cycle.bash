@@ -78,7 +78,6 @@ EOF
 
 function gen_login()
 {
-   
     sudo cat << EOF  > /etc/gdm3/custom.conf
 [daemon]
 AutomaticLoginEnable=True
@@ -91,7 +90,7 @@ function make_autostart()
 {
     mkdir -p ${autostartdir}
     ln -s /usr/local/bin/test4me ${autostartdir}/test4me-reboot
-  
+    gen_login  
     gen_autoterm
 }
 
