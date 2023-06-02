@@ -45,7 +45,7 @@ readonly autostartdir="${HOME}/autostart.dir"
 function gen_sudo()
 {
     [[ $USER == 'root' ]] && USER=ekf # add check if user ekf is present in this system
-    sudo addgroup --group testsu && sudo adduser ${USER} testsu && sudo echo '%testsu ALL=(ALL:ALL) NOPASSWD:ALL' > /tmp/gen4testing && sudo cp /tmp/gen4testing /etc/sudoers.d
+    sudo addgroup --group testsu && sudo adduser ${USER} testsu && echo '%testsu ALL=(ALL:ALL) NOPASSWD:ALL' > /tmp/gen4testing && sudo cp /tmp/gen4testing /etc/sudoers.d
 }
 
 function place_bin()
@@ -78,11 +78,12 @@ EOF
 
 function gen_login()
 {
-    sudo cat << EOF  > /etc/gdm3/custom.conf
+    sudo cat << EOF  > /tmp/custom.conf
 [daemon]
 AutomaticLoginEnable=True
 AutomaticLogin=${USER}
 EOF
+sudo cp /tmp/custom.conf /etc/gdm3/custom.conf
 }
 
 
