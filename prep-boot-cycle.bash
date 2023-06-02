@@ -7,6 +7,8 @@ function script_usage() {
     cat << EOF
 Helper script that prepare a new installed Ubuntu .... to work as a test system with boot cycles.
 
+The test system is a ubuntu 22.04 LTS. sudo must work.
+
 Usage:
      -h|--help                  Displays this help
      -v|--verbose               Displays verbose output
@@ -22,7 +24,7 @@ function parse_params() {
         param="$1"
         shift
         case $param in
-            i-\? | -h | --help)
+            \? | -h | --help)
                 script_usage
                 exit 0
                 ;;
@@ -76,19 +78,11 @@ EOF
 
 function make_autostart()
 {
-    mkdir ${autostartdir}
+    mkdir -p ${autostartdir}
     ln -s /usr/local/bin/test4me ${autostartdir}/test4me-reboot
-
-    # man braucht auch noch:
-    # ~/.config/autostart/term.desktop
-    cp term.desktop ${HOME}/.config/autostart
-    # gen_autoterm
+  
+    gen_autoterm
 }
-
-
-
-# Weitere Ideen fuer die Zukunft.
-# * test4me-1pow-1reboot
 
 # try to put it on the top of the script for easy modification.
 # DESC: Main control flow
@@ -108,11 +102,9 @@ echo "Settings -> User Auomatic login [enable]"
 }
 
 # Invoke main with args if not sourced
-# Approach via: https://stackoverflow.com/a/28776166/8787985
 if ! (return 0 2> /dev/null); then
     main "$@"
 fi
 
-# vim: syntax=sh cc=80 tw=79 ts=4 sw=4 sts=4 et sr
 
 
