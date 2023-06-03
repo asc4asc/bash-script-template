@@ -51,7 +51,11 @@ readonly autostartdir="${HOME}/autostart.dir"
 function gen_sudo()
 {
     [[ $USER == 'root' ]] && USER=ekf # add check if user ekf is present in this system
+    # Bug fix for install with fai.me ...?
+    # if user "ekf" in /etc/sudoers in der letzten loesche die letzte Zeile -> sed -i '$d'
+    # oder hänge echo '$USER ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers einfach noch dran?
     sudo addgroup --group testsu && sudo adduser ${USER} testsu && echo '%testsu ALL=(ALL:ALL) NOPASSWD:ALL' > /tmp/gen4testing && sudo cp /tmp/gen4testing /etc/sudoers.d
+    # evtl alle user aus /home/* in testsu? wenn als root gestartet?
 }
 
 # DESC: Place our testscript in the /use/local/bin dir ...
