@@ -36,6 +36,17 @@ function verbose_print() {
     fi
 }
 
+# DESC: 
+# ARGS: $@ (required): 
+# OUTS: None
+function demo_function() {
+    if [[ -n ${verbose-} ]]; then
+        pretty_print "$@"
+        pretty_print "This verbose function is called to describe the use of this function"
+    fi
+    echo "Hi, demo_function in action!"
+}
+
 # DESC: Usage help
 # ARGS: None
 # OUTS: None
@@ -45,6 +56,7 @@ Easy template for starting simple scripts with documentation.
 Usage:
      -h|--help                  Displays this help
      -v|--verbose               Displays verbose output
+     -d|--demo                  Call the demo function
 EOF
 }
 
@@ -57,13 +69,17 @@ function parse_params() {
         param="$1"
         shift
         case $param in
-            i-\? | -h | --help)
+            '-?' | -h | --help)
                 script_usage
                 exit 0
                 ;;
             -v | --verbose)
                 verbose=true
                 ;;
+            -d | --demo)
+                demo_function
+                ;;
+
             *)
                 script_exit "Invalid parameter was provided: $param" 1
                 ;;
