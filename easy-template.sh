@@ -40,10 +40,7 @@ function verbose_print() {
 # ARGS: $@ (required): 
 # OUTS: None
 function demo_function() {
-    if [[ -n ${verbose-} ]]; then
-        pretty_print "$@"
-        pretty_print "This verbose function is called to describe the use of this function"
-    fi
+    verbose_print "This verbose function is called to describe the use of this function"
     echo "Hi, demo_function in action!"
 }
 
@@ -79,7 +76,6 @@ function parse_params() {
             -d | --demo)
                 demo_function
                 ;;
-
             *)
                 script_exit "Invalid parameter was provided: $param" 1
                 ;;
