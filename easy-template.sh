@@ -8,17 +8,11 @@
 # OUTS: None
 function pretty_print() {
     if [[ $# -lt 1 ]]; then
-        script_exit 'Missing required argument to pretty_print()!' 2
+        exit 'Missing required argument to pretty_print()!' 
     fi
 
-    if [[ -z ${no_colour-} ]]; then
-        if [[ -n ${2-} ]]; then
-            printf '%b' "$2"
-        else
-            printf '%b' "$fg_green"
-        fi
-    fi
-
+    printf '%b' "$2"
+    
     # Print message & reset text attributes
     if [[ -n ${3-} ]]; then
         printf '%s%b' "$1" "$ta_none"
@@ -77,7 +71,8 @@ function parse_params() {
                 demoflag=true
                 ;;
             *)
-                script_exit "Invalid parameter was provided: $param" 1
+                echo "Invalid parameter was provided: $param" 
+                exit 126
                 ;;
         esac
     done

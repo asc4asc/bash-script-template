@@ -52,8 +52,8 @@ function script_usage() {
 Easy template for starting simple scripts with documentation.
 Usage:
      -h|--help                  Displays this help
-     -v|--verbose               Displays verbose output
-     -d|--demo                  Call the demo function
+     -v               Displays verbose output
+     -d               Call the demo function
 EOF
 }
 
