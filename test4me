@@ -4,23 +4,6 @@ readonly SLEEP4USER=5
 readonly OUT_FILE=count.file
 readonly LEN_OFF_POWERCYCLE=20 # powercycle
 
-function write_log()
-# $OUT_FILE global constante
-
-# ${myerr} globale variable
-{
-  echo -n "ERR:${myerr} " >>$OUT_FILE && date --iso-8601=ns | tr "\n" " " >>$OUT_FILE 
-  lspci -n|grep -i "168c" >>$OUT_FILE || echo -n "No Advantec Device found! " >>$OUT_FILE
-  echo "Will do ${script_ext}" >>$OUT_FILE
-}
-
-function catch_error()
-{
-local err=0
-lspci|grep "Qualcomm Atheros AR958x 802.11abgn Wireless Network Adapter (rev 01)" || err=127 || true
-return ${err}
-}
-
 # A best practices Bash script template with many useful functions. This file
 # combines the source.sh & script.sh files into a single script. If you want
 # your script to be entirely self-contained then this should be what you want!
@@ -41,6 +24,24 @@ fi
 
 # Enable errtrace or the error trap handler will not work as expected
 set -o errtrace         # Ensure the error trap handler is inherited
+
+function write_log()
+# DESC: We write a log file to document how many cycles without or with problems are done.
+# INFO: $OUT_FILE global constante
+# ${myerr} globale variable
+{
+  echo -n "ERR:${myerr} " >>$OUT_FILE && date --iso-8601=ns | tr "\n" " " >>$OUT_FILE 
+  lspci -n|grep -i "168c" >>$OUT_FILE || echo -n "No Advantec Device found! " >>$OUT_FILE
+  echo "Will do ${script_ext}" >>$OUT_FILE
+}
+
+function catch_error()
+# DESC: here we try to check if we get the correct output if not there is a error!
+{
+local err=0
+lspci|grep "Qualcomm Atheros AR958x 802.11abgn Wireless Network Adapter (rev 01)" || err=127 || true
+return ${err}
+}
 
 # DESC: Handler for unexpected errors
 # ARGS: $1 (optional): Exit code (defaults to 1)
