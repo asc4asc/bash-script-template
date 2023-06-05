@@ -116,6 +116,12 @@ function make_autostart()
     gen_autoterm
 }
 
+function set_gnome_desktop()
+{
+    gsettings set org.gnome.desktop.screensaver lock-enabled false
+}
+
+
 # try to put it on the top of the script for easy modification.
 # DESC: Main control flow
 # ARGS: $@ (optional): Arguments provided to the script
@@ -127,7 +133,7 @@ function main() {
     # here add your own commands and functions! 
     gen_sudo
     make_autostart
-
+    set_gnome_desktop
 }
 
 # Invoke main with args if not sourced
