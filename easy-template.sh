@@ -72,8 +72,10 @@ function parse_params() {
                 ;;
             -v | --verbose)
                 verbose=true
+                ;;
             -d | --demo)
-                demo_function
+                demoflag=true
+                ;;
             *)
                 script_exit "Invalid parameter was provided: $param" 1
                 ;;
@@ -91,6 +93,7 @@ function main() {
     #lock_init system
     # here add your own commands and functions!
     verbose_print "Show the verbose function!"
+    [ demoflag ] && demo_function
 }
 
 # Invoke main with args if not sourced
