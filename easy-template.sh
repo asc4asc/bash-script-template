@@ -72,10 +72,8 @@ function parse_params() {
                 ;;
             -v | --verbose)
                 verbose=true
-                ;;
             -d | --demo)
                 demo_function
-                ;;
             *)
                 script_exit "Invalid parameter was provided: $param" 1
                 ;;
