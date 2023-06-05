@@ -93,7 +93,7 @@ function main() {
     #lock_init system
     # here add your own commands and functions!
     verbose_print "Show the verbose function!"
-    [ demoflag ] && demo_function
+    [ ${demoflag} ] && demo_function
 }
 
 # Invoke main with args if not sourced
