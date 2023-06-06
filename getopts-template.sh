@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+readonly SCRIPT_NAME="${0##*/}"
 
 # DESC: Pretty print the provided string
 # ARGS: $1 (required): Message to print (defaults to a green foreground)
@@ -8,7 +9,8 @@
 # OUTS: None
 function pretty_print() {
     if [[ $# -lt 1 ]]; then
-        script_exit 'Missing required argument to pretty_print()!' 2
+        print 'Missing required argument to pretty_print()!' 
+        exit(127)
     fi
 
     if [[ -z ${no_colour-} ]]; then
@@ -48,8 +50,9 @@ function demo_function() {
 # ARGS: None
 # OUTS: None
 function script_usage() {
+    
     cat << EOF
-Easy template for starting simple scripts with documentation.
+${SCRIPT_NAME} Easy template for starting simple scripts with documentation.
 Usage:
      -h|--help                  Displays this help
      -v               Displays verbose output
@@ -74,8 +77,9 @@ function parse_params() {
         d )
           demoflag=true
           ;;
-        *)
-          script_exit "Invalid parameter was provided: $param" 1
+        *) 
+          printf '%s%b\n' "Invalid parameter was provided:" $param
+          exit(127) 
           ;;
       esac
     done
