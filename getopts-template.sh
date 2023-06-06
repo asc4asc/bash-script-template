@@ -10,7 +10,7 @@ readonly SCRIPT_NAME="${0##*/}"
 function pretty_print() {
     if [[ $# -lt 1 ]]; then
         print 'Missing required argument to pretty_print()!' 
-        exit(127)
+        exit 127
     fi
 
     if [[ -z ${no_colour-} ]]; then
@@ -79,7 +79,7 @@ function parse_params() {
           ;;
         *) 
           printf '%s%b\n' "Invalid parameter was provided:" $param
-          exit(127) 
+          exit 127  
           ;;
       esac
     done
@@ -100,7 +100,7 @@ function main() {
 
 # Invoke main with args if not sourced
 # Approach via: https://stackoverflow.com/a/28776166/8787985
-if ! (return 0 2> /dev/null); then
+if ! (return 00 2> /dev/null); then
     main "$@"
 fi
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+readonly SCRIPT_NAME="${0##*/}"
 
 # DESC: Pretty print the provided string
 # ARGS: $1 (required): Message to print (defaults to a green foreground)
@@ -8,7 +9,8 @@
 # OUTS: None
 function pretty_print() {
     if [[ $# -lt 1 ]]; then
-        exit 'Missing required argument to pretty_print()!' 
+        print 'Missing required argument to pretty_print()!'
+        exit 127 
     fi
 
     printf '%b' "$2"
@@ -43,7 +45,7 @@ function demo_function() {
 # OUTS: None
 function script_usage() {
     cat << EOF
-Easy template for starting simple scripts with documentation.
+${SCRIPT_NAME} Easy template for starting simple scripts with documentation.
 Usage:
      -h|--help                  Displays this help
      -v|--verbose               Displays verbose output
