@@ -119,15 +119,16 @@ function main() {
     # here add your own commands and functions!
     verbose_print "Show the verbose function!"
     [ ${demoflag} ] && demo_function
-    
+
+    script_usage 
+
     if [ ${script_ext} == "reboot" ] 
     then
-      echo ${script_ext};
+      echo Well done can use the extension: ${script_ext};
     else
       echo No known script extension ${script_ext}  
     fi
     
-    script_usage 
 }
 
 # Invoke main with args if not sourced
