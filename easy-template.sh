@@ -45,7 +45,7 @@ function demo_function() {
 # OUTS: None
 function script_usage() {
     cat << EOF
-${SCRIPT_NAME} Easy template for starting simple scripts with documentation.
+${SCRIPT_NAME}: Easy template for starting simple scripts with documentation.
 Usage:
      -h|--help                  Displays this help
      -v|--verbose               Displays verbose output

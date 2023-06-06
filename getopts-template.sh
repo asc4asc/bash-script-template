@@ -13,14 +13,8 @@ function pretty_print() {
         exit 127
     fi
 
-    if [[ -z ${no_colour-} ]]; then
-        if [[ -n ${2-} ]]; then
-            printf '%b' "$2"
-        else
-            printf '%b' "$fg_green"
-        fi
-    fi
-
+    printf '%b' "$2"
+    
     # Print message & reset text attributes
     if [[ -n ${3-} ]]; then
         printf '%s%b' "$1" "$ta_none"
@@ -52,7 +46,7 @@ function demo_function() {
 function script_usage() {
     
     cat << EOF
-${SCRIPT_NAME} Easy template for starting simple scripts with documentation.
+${SCRIPT_NAME}: Easy template for starting simple scripts with documentation.
 Usage:
      -h               Displays this help
      -v               Displays verbose output
