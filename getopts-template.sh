@@ -54,7 +54,7 @@ function script_usage() {
     cat << EOF
 ${SCRIPT_NAME} Easy template for starting simple scripts with documentation.
 Usage:
-     -h|--help                  Displays this help
+     -h               Displays this help
      -v               Displays verbose output
      -d               Call the demo function
 EOF
