@@ -126,7 +126,7 @@ function main() {
     then
       echo Well done can use the extension: ${script_ext};
     else
-      echo No known script extension ${script_ext}  
+      echo No known script extension: ${script_ext}  
     fi
     
 }
