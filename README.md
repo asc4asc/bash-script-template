@@ -6,6 +6,9 @@ Copied from https://github.com/ralish/bash-script-template
 First reduce it to a short template that I will easy use. If I need more I come back to the original. :-)
 
 # Think about? 
+* -h -? (--help) stops the command no command execution give help.
+* arguments are normally allways execute in the same order!
+* long  command-line arguments example: --help as alternative possible? 
 * loggger
 * getopts
 * echo "test" > /tmp/log$$
