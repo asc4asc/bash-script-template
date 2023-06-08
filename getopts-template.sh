@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-readonly SCRIPT_NAME="${0##*/}"
 
 # DESC: Pretty print the provided string
 # ARGS: $1 (required): Message to print (defaults to a green foreground)
