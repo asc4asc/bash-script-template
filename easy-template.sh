@@ -36,7 +36,7 @@ function verbose_print() {
 # ARGS: $@ (required): 
 # OUTS: None
 function demo_function() {
-    verbose_print "This verbose function is called to describe the use of this function"
+    verbose_print "This verbose function is called to describe the use of verbose in the domo function"
     echo "Hi, demo_function in action!"
 }
 
