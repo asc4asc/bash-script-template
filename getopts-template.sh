@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-readonly SCRIPT_NAME="${0##*/}"
 
 # DESC: Pretty print the provided string
 # ARGS: $1 (required): Message to print (defaults to a green foreground)
@@ -115,20 +114,19 @@ function main() {
 
     script_init
     parse_params "$@"
-    #lock_init system
+    # lock_init system
     # here add your own commands and functions!
-    verbose_print "Show the verbose function!"
-    [ ${demoflag} ] && demo_function
-
-    script_usage 
-
-    if [ ${script_ext} == "reboot" ] 
-    then
-      echo Well done can use the extension: ${script_ext};
-    else
-      echo No known script extension: ${script_ext}  
-    fi
     
+    case ${script_ext} in
+      d | demo)
+        demo_function
+        ;;
+      *)
+        verbose_print "Show the verbose function!"
+        [ ${demoflag} ] && demo_function
+        script_usage
+        ;;
+    esac
 }
 
 # Invoke main with args if not sourced
