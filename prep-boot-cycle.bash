@@ -131,7 +131,7 @@ function main() {
     parse_params "$@"
     #lock_init system
     # here add your own commands and functions! 
-    gen_sudo
+    # gen_sudo # done in remote!
     make_autostart
     set_gnome_desktop
 }
