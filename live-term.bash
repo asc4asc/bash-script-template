@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 readonly TDIR=live-term
-# readonly export ARCHIVE_AREAS="main non-free non-free-firmware firmware-misc-non-free contrib" # does not help
+
+( mkdir -p $TDIR && cd $TDIR && lb clean && lb config --mirror-bootstrap "http://deb.debian.org/debian/" --mirror-binary "http://deb.debian.org/debian/" --security false --updates "false" --distribution "bookworm" --debian-installer "live" --debian-installer-distribution "bookworm" --cache-packages "false" --archive-areas "main non-free-firmware contrib" --bootappend-live "boot=live username=ekf toram" )
 
 mkdir -p ${TDIR}/config/includes.chroot/usr/local/sbin
 mkdir -p ${TDIR}/config/includes.chroot/usr/local/bin
@@ -36,16 +37,13 @@ chmod a+x ${TDIR}/config/includes.chroot/usr/local/bin/*
 chmod a+x ${TDIR}/config/includes.chroot/etc/skel/progpc7 
 chmod a+x ${TDIR}/config/includes.chroot/etc/skel/progsc5 
 
-echo libc6-i386 > ${TDIR}/config/package-lists/ekf.list.chroot # needed for progsi ....
+# mkdir -p ${TDIR}/config/includes.chroot/etc/default/
+# cp /etc/default/grub ${TDIR}/config/includes.chroot/etc/default/
 
-#mkdir -p ${TDIR}/config/includes.chroot/etc/default/
-#cp /etc/default/grub ${TDIR}/config/includes.chroot/etc/default/
-
-# ( mkdir -p $TDIR && cd $TDIR && lb clean && lb config --archive-areas "main non-free contrib") # install bullseye
-( mkdir -p $TDIR && cd $TDIR && lb clean && lb config --mirror-bootstrap "http://deb.debian.org/debian/" --mirror-binary "http://deb.debian.org/debian/" --security false --updates "false" --distribution "bookworm" --debian-installer "live" --debian-installer-distribution "bookworm" --cache-packages "false" --archive-areas "main non-free-firmware contrib" --bootappend-live "boot=live username=ekf toram" )
-#( mkdir -p $TDIR && cd $TDIR && lb clean && lb config --mirror-bootstrap "http://deb.debian.org/debian/" --mirror-binary "http://deb.debian.org/debian/" --security false --updates "false" --distribution "bookworm" --debian-installer "live" --debian-installer-distribution "bookworm" --cache-packages "false" --archive-areas "main non-free-firmware contrib" )
 # echo more-packages >> ${TDIR}/config/package-lists/ekf.list.chroot # add
 # echo debian-installer-launcher >> ${TDIR}/config/package-lists/installer.list.chroot
+
+echo libc6-i386 > ${TDIR}/config/package-lists/ekf.list.chroot # needed for progsi ....
 
 ( cd ${TDIR} && lb build )
 
