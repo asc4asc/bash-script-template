@@ -130,15 +130,21 @@ sudo chmod a+x  ${TDIR}/config/includes.chroot/usr/local/bin/*
 }
 prog4ekf-misc
 
-function gen-hist-misc
+function create-hist-misc
 {
-cat >> ${TDIR}/config/includes.chroot/etc/skel/.bash_history << "EOF"
+cat > ${TDIR}/config/includes.chroot/etc/skel/.bash_history << "EOF"
 gsettings set org.gnome.SessionManager logout-prompt 'false'
+gsettings set org.gnome.shell favorite-apps "['org.gnome.Terminal.desktop']"
+gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
+gsettings set org.gnome.desktop.session idle-delay 0
+gsettings set org.gnome.SessionManager logout-prompt 'false' # Damit man auch mit dem Griff runterfahren kann ohne 60s zu warten.
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 0
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout 0
 sudo4ekf
 sudo calamares 
 EOF
 }
-gen-hist-misc
+create-hist-misc
 
 function add2hist-efiboot-check
 {
