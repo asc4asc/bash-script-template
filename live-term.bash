@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 readonly DISTRI="stable" # "bookworm" "trixie" "bullseye" (oldoldstable oldstable stable testing sid)
-readonly X="" # terminal ohne X 
-# readonly X="gnome" # "gnome","" terminal ohne X 
+# readonly X="" # terminal ohne X 
+readonly X="gnome" # "gnome","" terminal ohne X 
 readonly BOOT="toram" # "toram","" normal from usb ...
 # readonly FUNC="iperf-master" # iperf-master,"" no special function / not so easy to implement without confusing?
 
@@ -55,7 +55,7 @@ function setup-calamares-installer
 
 function live-config
 {
-( mkdir -p $TDIR && cd $TDIR && lb clean && lb config --mirror-bootstrap "http://deb.debian.org/debian/" --mirror-binary "http://deb.debian.org/debian/" --security false --updates "false" --distribution ${DISTRI} --cache-packages "false" --archive-areas "main non-free-firmware contrib" --bootappend-live "boot=live username=ekf ${BOOT}" )
+( mkdir -p $TDIR && cd $TDIR && lb clean && lb config --mirror-bootstrap "http://deb.debian.org/debian/" --mirror-binary "http://deb.debian.org/debian/" --security false --updates "false" --distribution ${DISTRI} --cache-packages "false" --archive-areas "main non-free-firmware contrib" --bootappend-live "boot=live username=ekf ${BOOT}" --bootappend-live-failsafe "boot=live $BOOT noapic nolapic noapm nospm nodma nomce nosplash vga=788" )
 # ( mkdir -p $TDIR && cd $TDIR && lb clean && lb config --mirror-bootstrap "http://deb.debian.org/debian/" --mirror-binary "http://deb.debian.org/debian/" --security false --updates "false" --distribution "bookworm" --debian-installer "live" --debian-installer-distribution "bookworm" --cache-packages "false" --archive-areas "main non-free-firmware contrib" --bootappend-live "boot=live username=ekf toram" )
 return 0
 }
@@ -82,10 +82,11 @@ function add-iperf3-4gnome
 # readonly TDIR="live-${FUNC}-${X}4term-${BOOT}-${DISTRI}"
 readonly TDIR="live-${X}4term-${BOOT}-${DISTRI}"
 
-live-config
+live-config # Erstellen der Grundstrucktur mit einigen Parametern.
 
 ${GNOME} && echo task-gnome-desktop >> ${TDIR}/config/package-lists/desktop.list.chroot
 ${GNOME} && echo calamares-settings-debian calamares >> ${TDIR}/config/package-lists/installer.list.chroot
+
 echo chrony >> ${TDIR}/config/package-lists/time.list.chroot
 
 ${GNOME} && auto-start4gnome 
