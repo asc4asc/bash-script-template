@@ -9,6 +9,7 @@ Use a link or rename the script to execute command with the extension like templ
 
 # Think about? 
 * -h -? (--help) stops the command no command execution give help.
+* If i set the -e exit in a script if a test get zero 0? Is this good for programming? 
 * arguments are normally allways execute in the same order!
 * long  command-line arguments example: --help as alternative possible? 
 * loggger
